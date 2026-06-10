@@ -1,0 +1,814 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Culture Clash | Indigenous Justice Campaign</title>
+  <style>
+    :root {
+      --ink: #161616;
+      --paper: #f7f5ef;
+      --surface: #ffffff;
+      --red: #a7352a;
+      --red-dark: #6e211c;
+      --gold: #d19b32;
+      --teal: #1c6f69;
+      --blue: #243f78;
+      --muted: #65615a;
+      --line: rgba(22, 22, 22, .14);
+      --shadow: 0 18px 45px rgba(22, 22, 22, .12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 1rem;
+      top: -4rem;
+      background: var(--ink);
+      color: #fff;
+      padding: .7rem 1rem;
+      border-radius: 6px;
+      z-index: 20;
+    }
+
+    .skip-link:focus {
+      top: 1rem;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(247, 245, 239, .94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+      min-height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background:
+        conic-gradient(from 0deg, var(--red) 0 25%, var(--gold) 0 50%, var(--teal) 0 75%, var(--ink) 0 100%);
+      box-shadow: 0 0 0 3px rgba(255,255,255,.8);
+      flex: 0 0 auto;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: .25rem;
+      margin: 0;
+      padding: 0;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 40px;
+      padding: .45rem .7rem;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .92rem;
+      border-radius: 6px;
+    }
+
+    nav a:hover,
+    nav a:focus-visible {
+      background: rgba(167, 53, 42, .1);
+      color: var(--ink);
+      outline: none;
+    }
+
+    .hero {
+      min-height: calc(100svh - 66px);
+      padding: clamp(3rem, 8vh, 5.5rem) 0 clamp(4.5rem, 9vh, 7rem);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        linear-gradient(115deg, rgba(22,22,22,.92), rgba(22,22,22,.7) 47%, rgba(167,53,42,.18)),
+        radial-gradient(circle at 78% 16%, rgba(209,155,50,.28), transparent 22rem),
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255,255,255,.04) 1px, transparent 1px),
+        #191715;
+      background-size: auto, auto, 64px 64px, 64px 64px, auto;
+      color: #fff;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -10vw -15rem -10vw;
+      height: 17rem;
+      background: var(--paper);
+      transform: rotate(-2deg);
+      transform-origin: left top;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, .8fr);
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: center;
+    }
+
+    .eyebrow {
+      margin: 0 0 1rem;
+      color: #f3c766;
+      font-size: .83rem;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      line-height: 1.03;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      max-width: 11ch;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3.5rem, 11vw, 8.4rem);
+      font-weight: 900;
+    }
+
+    .hero-copy {
+      max-width: 720px;
+      margin: 1.35rem 0 0;
+      color: rgba(255,255,255,.86);
+      font-size: clamp(1.07rem, 1.8vw, 1.35rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: .75rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      min-height: 46px;
+      padding: .75rem 1rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 850;
+      border: 1px solid rgba(255,255,255,.22);
+    }
+
+    .button.primary {
+      background: var(--gold);
+      color: #1c1608;
+      border-color: transparent;
+    }
+
+    .button.secondary {
+      color: #fff;
+      background: rgba(255,255,255,.08);
+    }
+
+    .button svg {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+    }
+
+    .hero-visual {
+      display: grid;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+
+    .scale {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,.28);
+    }
+
+    .scale-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      color: rgba(255,255,255,.76);
+      font-weight: 800;
+      font-size: .88rem;
+      margin-bottom: .7rem;
+    }
+
+    .bar {
+      height: 19px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.14);
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      width: var(--value);
+      background: var(--fill);
+      border-radius: inherit;
+    }
+
+    .comparison {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .metric {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .metric strong {
+      display: block;
+      color: #fff;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      line-height: .95;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: .5rem;
+      color: rgba(255,255,255,.78);
+      font-weight: 700;
+    }
+
+    section {
+      padding: clamp(3.5rem, 7vw, 6rem) 0;
+      position: relative;
+    }
+
+    .section-inner {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, .65fr) minmax(280px, .45fr);
+      gap: 2rem;
+      align-items: end;
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-size: clamp(2.1rem, 5vw, 4.4rem);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 1.08rem;
+      margin: .85rem 0 0;
+      max-width: 720px;
+    }
+
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .fact-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 1.15rem;
+      min-height: 190px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 10px 22px rgba(22,22,22,.06);
+    }
+
+    .fact-card strong {
+      display: block;
+      color: var(--red-dark);
+      font-size: clamp(2rem, 5vw, 3.15rem);
+      line-height: .95;
+      margin-bottom: .7rem;
+    }
+
+    .fact-card p {
+      margin: 0;
+      color: #3b3935;
+      font-weight: 700;
+    }
+
+    .fact-card small {
+      margin-top: 1rem;
+      color: var(--muted);
+    }
+
+    .chart-panel {
+      margin-top: 1rem;
+      background: #141414;
+      color: #fff;
+      border-radius: 8px;
+      padding: clamp(1rem, 3vw, 1.6rem);
+      display: grid;
+      grid-template-columns: minmax(0, .75fr) minmax(280px, 1fr);
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .chart-panel h3 {
+      font-size: clamp(1.45rem, 3vw, 2rem);
+      margin-bottom: .65rem;
+    }
+
+    .chart-panel p {
+      color: rgba(255,255,255,.74);
+      margin: 0;
+    }
+
+    .index-bars {
+      display: grid;
+      gap: .85rem;
+    }
+
+    .index-row {
+      display: grid;
+      grid-template-columns: 120px 1fr 48px;
+      gap: .7rem;
+      align-items: center;
+      font-weight: 850;
+      font-size: .92rem;
+    }
+
+    .doc-visuals {
+      margin-top: 1.2rem;
+    }
+
+    .doc-visuals h3 {
+      font-size: clamp(1.35rem, 3vw, 2rem);
+      margin-bottom: .35rem;
+    }
+
+    .doc-visuals > p {
+      margin: 0 0 1rem;
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    figure.doc-image {
+      margin: 0;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 10px 22px rgba(22,22,22,.06);
+    }
+
+    .doc-image img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #fff;
+    }
+
+    .doc-image figcaption {
+      padding: .8rem 1rem 1rem;
+      color: var(--muted);
+      font-size: .92rem;
+      font-weight: 700;
+    }
+
+    .quote-visual {
+      margin-top: 1rem;
+      display: grid;
+      grid-template-columns: minmax(300px, .82fr) minmax(0, 1fr);
+      gap: 1.25rem;
+      align-items: center;
+    }
+
+    .causes {
+      background: #fff;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .cause-layout {
+      display: grid;
+      grid-template-columns: minmax(260px, .7fr) minmax(0, 1fr);
+      gap: clamp(1.5rem, 4vw, 3rem);
+      align-items: start;
+    }
+
+    .cause-list {
+      display: grid;
+      gap: .85rem;
+    }
+
+    .cause-item {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 1rem;
+      background: #fbfaf7;
+    }
+
+    .cause-item h3 {
+      font-size: 1.15rem;
+      margin-bottom: .45rem;
+    }
+
+    .cause-item p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .system-map {
+      border-left: 4px solid var(--red);
+      padding-left: 1.2rem;
+      display: grid;
+      gap: .85rem;
+    }
+
+    .map-step {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr);
+      gap: .8rem;
+      align-items: start;
+    }
+
+    .map-step span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: #fff;
+      font-weight: 900;
+    }
+
+    .map-step h3 {
+      font-size: 1.05rem;
+      margin-bottom: .25rem;
+    }
+
+    .map-step p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .voices-grid,
+    .solutions-grid,
+    .support-grid,
+    .source-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .voice-card,
+    .solution-card,
+    .support-card,
+    .source-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 10px 22px rgba(22,22,22,.06);
+    }
+
+    .thumb {
+      min-height: 150px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(0,0,0,.7), rgba(0,0,0,.18)),
+        linear-gradient(45deg, var(--red), var(--teal));
+      font-weight: 900;
+      font-size: 3rem;
+    }
+
+    .thumb.gold {
+      background:
+        linear-gradient(135deg, rgba(0,0,0,.68), rgba(0,0,0,.14)),
+        linear-gradient(45deg, var(--gold), var(--blue));
+    }
+
+    .thumb.blue {
+      background:
+        linear-gradient(135deg, rgba(0,0,0,.66), rgba(0,0,0,.16)),
+        linear-gradient(45deg, var(--blue), var(--red));
+    }
+
+    .card-body {
+      padding: 1rem;
+    }
+
+    .card-body h3 {
+      font-size: 1.08rem;
+      margin-bottom: .45rem;
+    }
+
+    .card-body p {
+      margin: 0 0 .9rem;
+      color: var(--muted);
+    }
+
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      color: var(--red-dark);
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .text-link:hover,
+    .text-link:focus-visible {
+      text-decoration: underline;
+      outline: none;
+    }
+
+    .solutions {
+      background: #191715;
+      color: #fff;
+    }
+
+    .solutions .lead {
+      color: rgba(255,255,255,.74);
+    }
+
+    .solution-card {
+      background: rgba(255,255,255,.08);
+      color: #fff;
+      border-color: rgba(255,255,255,.16);
+      padding: 1.1rem;
+      box-shadow: none;
+    }
+
+    .solution-card h3 {
+      color: #f3c766;
+      font-size: 1.18rem;
+      margin-bottom: .5rem;
+    }
+
+    .solution-card p,
+    .solution-card li {
+      color: rgba(255,255,255,.78);
+    }
+
+    .solution-card ul {
+      margin: .75rem 0 0;
+      padding-left: 1.1rem;
+    }
+
+    .callout {
+      margin-top: 1.2rem;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 8px;
+      padding: 1.2rem;
+      background: rgba(209,155,50,.12);
+    }
+
+    .callout p {
+      margin: .45rem 0 0;
+      color: rgba(255,255,255,.78);
+    }
+
+    .support-card {
+      padding: 1.1rem;
+      min-height: 170px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .support-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: .5rem;
+    }
+
+    .support-card p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .sources {
+      background: #fff;
+      border-top: 1px solid var(--line);
+    }
+
+    .source-card {
+      padding: 1rem;
+      box-shadow: none;
+    }
+
+    .source-card p {
+      margin: .3rem 0 .8rem;
+      color: var(--muted);
+    }
+
+    footer {
+      background: var(--ink);
+      color: rgba(255,255,255,.8);
+      padding: 2rem 0;
+    }
+
+    .footer-inner {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .footer-inner a {
+      color: #f3c766;
+      font-weight: 850;
+      text-decoration: none;
+    }
+
+    @media (max-width: 920px) {
+      .hero-inner,
+      .section-head,
+      .chart-panel,
+      .cause-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .facts-grid,
+      .image-grid,
+      .voices-grid,
+      .solutions-grid,
+      .support-grid,
+      .source-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: .85rem 0;
+      }
+
+      nav ul {
+        justify-content: flex-start;
+      }
+
+      nav a {
+        min-height: 34px;
+        padding: .35rem .5rem;
+        font-size: .86rem;
+      }
+
+      .comparison,
+      .facts-grid,
+      .image-grid,
+      .voices-grid,
+      .solutions-grid,
+      .support-grid,
+      .source-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .index-row {
+        grid-template-columns: 88px 1fr 40px;
+      }
+
+      .quote-visual {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header>
+    <div class="nav">
+      <a class="brand" href="index.html" aria-label="Indigenous Justice Campaign home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Indigenous Justice Campaign</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="facts.html">Facts</a></li>
+          <li><a href="causes.html">Causes</a></li>
+          <li><a href="voices.html">Voices</a></li>
+          <li><a href="solutions.html">Solutions</a></li>
+          <li><a href="support.html">Take Action</a></li>
+          <li><a href="bibliography.html">Bibliography</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section aria-labelledby="page-title">
+      <div class="section-inner">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Root Cause</p>
+            <h2 id="page-title">The justice system often conflicts with Indigenous worldviews.</h2>
+          </div>
+        </div>
+        <div class="cause-layout">
+          <article class="cause-item">
+            <h3>Key points from the campaign plan</h3>
+            <ul>
+              <li>Different meanings of guilt and responsibility can create misunderstanding in court.</li>
+              <li>Indigenous worldviews are more likely to focus on rehabilitation, healing, and community reintegration.</li>
+              <li>The campaign calls for justice responses that respect Indigenous legal traditions and culturally grounded alternatives.</li>
+            </ul>
+          </article>
+          <div class="system-map" aria-label="Page navigation">
+            <div class="map-step"><span>1</span><div><h3>Return to the hub</h3><p><a class="text-link" href="causes.html">Back to Causes</a></p></div></div>
+            <div class="map-step"><span>2</span><div><h3>Take action</h3><p><a class="text-link" href="support.html">Support the Indigenous Justice Campaign</a></p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>Indigenous Justice Campaign</span>
+      <a href="index.html">Home</a>
+    </div>
+  </footer>
+</body>
+</html>
+
+
+
